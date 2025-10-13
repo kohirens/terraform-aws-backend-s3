@@ -3,13 +3,12 @@ data "aws_caller_identity" "current" {}
 locals {
   account_id     = data.aws_caller_identity.current.account_id
   name           = "terraform-backend"
-  full_name      = "${var.label}-${local.account_id}-${local.name}"
+  full_name      = var.label != "" ? "${var.label}-${local.account_id}-${local.name}" : "${local.account_id}-${local.name}"
   dynamodb_count = var.use_s3_locking ? 0 : 1
 
-  tags = merge({
-    module = local.name
-    label  = var.label
-  }, var.tags)
+  tags = merge(
+    var.label != "" ? { module = local.name, label = var.label } : { module = local.name }
+  )
 }
 
 resource "aws_s3_bucket_policy" "backend_storage" {
