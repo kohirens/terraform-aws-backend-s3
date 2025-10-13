@@ -1,4 +1,5 @@
 variable "label" {
+  default     = ""
   description = "Optional label to apply to all resources"
   type        = string
 }
