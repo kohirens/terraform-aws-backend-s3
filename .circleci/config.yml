@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-    vr: kohirens/version-release@4.4.4
+    vr: kohirens/version-release@5.1.8
     aws-cli: circleci/aws-cli@5.1.2
 
 parameters:
